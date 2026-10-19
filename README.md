@@ -1,6 +1,6 @@
 # CrawlBrief 0.2.1-pilot
 
-[日本語の使い方](はじめに-日本語.md) · [Download the free pilot](https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/releases/tag/v0.2.1-pilot) · [Free-pilot permission](PILOT-PERMISSION.txt)
+[日本語の使い方](はじめに-日本語.md) · [Download the free pilot](https://github.com/TTTBtools/crawlbrief-pilot-downloads/releases/tag/v0.2.1-pilot) · [Free-pilot permission](PILOT-PERMISSION.txt)
 
 Turn an existing crawl CSV into a reviewed client report, on your own computer.
 
@@ -46,7 +46,7 @@ Automated tests and earlier sample checks do not prove that all real data or bro
 
 Try the fictional sample first, then a non-sensitive export on your own computer. Tell us your browser, export tool/version, whether you could finish, and the exact error wording if any. Do not upload client data, credentials or confidential screenshots to a public issue.
 
-[Share pilot feedback](https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/issues/new?template=pilot-feedback.yml) using the short form, or [report another issue](https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/issues). GitHub sign-in is required to submit feedback; it is not required to run the app. Your answers will be public. Do not post confidential files.
+[Share pilot feedback](https://github.com/TTTBtools/crawlbrief-pilot-downloads/issues/new?template=pilot-feedback.yml) using the short form, or [report another issue](https://github.com/TTTBtools/crawlbrief-pilot-downloads/issues). GitHub sign-in is required to submit feedback; it is not required to run the app. Your answers will be public. Do not post confidential files.
 
 ## Free pilot
 
