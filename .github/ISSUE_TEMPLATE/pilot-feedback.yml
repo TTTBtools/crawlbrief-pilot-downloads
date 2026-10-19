@@ -15,6 +15,7 @@
       "attributes": {
         "label": "What did you try?",
         "options": [
+          "Please choose - not yet answered",
           "The fictional sample only",
           "My own non-sensitive CSV export",
           "I have not tried it yet"
@@ -30,6 +31,7 @@
       "attributes": {
         "label": "Could you save a report?",
         "options": [
+          "Please choose - not yet answered",
           "Yes - I saved an HTML report or action CSV",
           "No - the CSV would not import",
           "No - the report would not preview or download",
