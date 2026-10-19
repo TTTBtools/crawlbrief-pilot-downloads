@@ -26,7 +26,7 @@
 </div>
 <section id="review" class="panel review" hidden><div class="step">03 / REVIEW & EXPORT</div><div class="review-head"><h2>Keep the useful findings.</h2><div class="buttons"><button id="select-all">Include all</button><button id="select-none">Exclude all</button></div></div><div id="stats" class="stats"></div><p id="coverage" class="hint"></p><div class="filter-row"><label for="filter">Show</label><select id="filter"><option value="all">All findings</option><option value="Check first">Check first</option><option value="Review">Review</option></select><span id="selection" class="hint"></span></div><div id="findings"></div><div class="pagination"><button id="prev-page">Previous</button><span id="page-label"></span><button id="next-page">Next</button></div><details id="changes"><summary>See what changed between exports</summary><div id="comparison"></div></details><div class="export-bar"><label class="confirm"><input type="checkbox" id="confirmed"> I reviewed the selected findings, summary, comparison and sensitive URL details before sharing.</label><div class="buttons"><button id="preview" class="primary">Preview report</button><button id="html">Download report HTML</button><button id="csv">Download action CSV</button></div><p class="hint">To make a PDF, open the downloaded HTML and use Print → Save as PDF.</p></div><div id="export-message" role="status" aria-live="polite"></div></section>
 <section id="preview-section" class="panel" hidden><div class="review-head"><h2>Report preview</h2><button id="close-preview">Close preview</button></div><iframe id="report-preview" title="Client report preview" sandbox=""></iframe></section>
-<footer>CrawlBrief 0.2.0-pilot · A reporting assistant, not a site health certificate.<br>Independent software. Not affiliated with or endorsed by Screaming Frog.</footer>
+<footer>CrawlBrief 0.2.1-pilot · A reporting assistant, not a site health certificate.<br>Independent software. Not affiliated with or endorsed by Screaming Frog.</footer>
 </main><script>(function (root) {
   'use strict';
   // Original document-and-check mark. Kept inline so the app needs no network.
@@ -37,7 +37,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script><script>(function (root) {
   'use strict';
-  const VERSION = '0.2.0-pilot';
+  const VERSION = '0.2.1-pilot';
   const Brand = typeof module !== 'undefined' && module.exports ? require('./brand.js') : root.CrawlBriefBrand;
   const LIMIT = 5000;
   const RULES = {
@@ -89,7 +89,8 @@
       const raw = get(row, 'status code');
       if (!/^(?:[1-5]\d\d|0)?$/.test(raw)) throw Error('Invalid status code at row ' + (index + 2) + '.');
       const status = Number(raw), type = get(row, 'content type');
-      records.set(address, {address, status, html: type !== null && /(?:text\/html|application\/xhtml\+xml)/i.test(type),
+      const mediaType = type === null ? '' : type.split(';', 1)[0].trim().toLowerCase();
+      records.set(address, {address, status, html: ['text/html', 'application/xhtml+xml'].includes(mediaType),
         title: get(row, 'title 1'), description: get(row, 'meta description 1'), h1: get(row, 'h1-1'), indexability: get(row, 'indexability status')});
     }
     const disabled = [];

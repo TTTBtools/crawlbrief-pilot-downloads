@@ -1,4 +1,4 @@
-CRAWLBRIEF 0.2.0-PILOT — FREE EVALUATION PERMISSION
+CRAWLBRIEF 0.2.1-PILOT — FREE EVALUATION PERMISSION
 Approved by the owner: 20 October 2026
 Provider: gatesusukino-beep
 Project and contact: https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads
@@ -53,5 +53,5 @@ private contact details or confidential screenshots. The owner may use
 non-confidential feedback to improve the product. This does not authorize
 publishing a participant's name or testimonial.
 
-This permission applies to the authorized 0.2.0-pilot download from the
+This permission applies to the authorized 0.2.1-pilot download from the
 public project above. No paid purchase is required.

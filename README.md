@@ -1,10 +1,14 @@
-# CrawlBrief 0.2.0-pilot
+# CrawlBrief 0.2.1-pilot
 
-[日本語の使い方](はじめに-日本語.md) · [Download the free pilot](https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/releases/tag/v0.2.0-pilot) · [Free-pilot permission](PILOT-PERMISSION.txt)
+[日本語の使い方](はじめに-日本語.md) · [Download the free pilot](https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/releases/tag/v0.2.1-pilot) · [Free-pilot permission](PILOT-PERMISSION.txt)
 
 Turn an existing crawl CSV into a reviewed client report, on your own computer.
 
 This is an early, AI-assisted pilot for people who already use crawl exports in client work. The pilot is free. No account, installation or AI API key is needed to run the single HTML app.
+
+## Patch in 0.2.1
+
+HTML-only checks now require the actual HTML media type. A different media type that merely contains the text `text/html` is no longer treated as HTML, including during previous-export comparison. This patch passed 50 automated checks; real-user acceptance and broad export compatibility are still unverified. The free-pilot conditions are unchanged.
 
 ## Start with the fictional sample
 
@@ -36,7 +40,7 @@ It does not crawl websites or verify live repairs. It is not a complete SEO audi
 
 The app contains no built-in upload, AI API request or analytics. Your browser and extensions are outside its control. Work is not automatically saved. Reports retain URLs and query strings; review them before sharing. The examples use fictional `.example` addresses.
 
-Automated tests and earlier sample checks do not prove that all real data or browser combinations work. The 0.2.0 pilot interface still needs real-user acceptance. It was built with AI assistance; no independent customer results or verified time-saving claims are available yet.
+Automated tests and earlier sample checks do not prove that all real data or browser combinations work. The 0.2.1 pilot interface still needs real-user acceptance. It was built with AI assistance; no independent customer results or verified time-saving claims are available yet.
 
 ## Feedback
 
