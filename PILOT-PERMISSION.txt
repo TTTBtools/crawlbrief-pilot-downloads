@@ -1,0 +1,57 @@
+CRAWLBRIEF 0.2.0-PILOT — FREE EVALUATION PERMISSION
+Approved by the owner: 20 October 2026
+Provider: gatesusukino-beep
+Project and contact: https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads
+Contact: https://github.com/gatesusukino-beep/crawlbrief-pilot-downloads/issues
+
+The owner has approved the following free evaluation permission for this
+pilot copy:
+
+1. Free pilot use
+You may use this pilot copy of CrawlBrief and the fictional examples on your
+own computer, at no charge, to evaluate the supported reporting workflow.
+You may use your own compatible crawl CSVs where you have permission to
+process the data. You are not required to submit your CSVs or client data.
+
+2. Reports and modifications
+You may edit and share reports you generate after reviewing their content.
+You may modify your local copy for your own internal evaluation. This does
+not give permission to redistribute, sublicense or resell the application,
+its source, or a competing product containing its code. No trademark rights
+are granted. App code is visible in the HTML; this is not an open-source grant.
+
+3. No purchase or subscription
+This pilot has no price, payment collection, subscription or automatic charge.
+Using it does not commit you to buying a later version. A possible future
+price of US$19 once is a proposal, not an order or a promise of future access.
+This downloaded pilot has no built-in expiry or payment activation.
+
+4. Scope and review
+CrawlBrief formats selected observations from imported CSVs. It does not
+crawl websites, verify live repairs, certify site health or provide a full
+SEO, security or accessibility audit. You must review the selected findings,
+summary, comparison, notes and sensitive URL details before sharing a report.
+Missing pages or evidence are not verified repairs.
+
+5. Data and session handling
+The application processes the CSV locally and contains no built-in uploads,
+AI API calls or analytics. Your browser, extensions, sync and chosen file
+sharing services are outside its control. Reports retain URLs and query
+strings. Work is not automatically saved; download before closing or reloading.
+
+6. Early build
+This is an early pilot. Compatibility with unmodified real exports and the
+new browser interface still need evaluation. The pilot is provided as-is,
+without a promise of fitness, error-free operation, response times, future
+updates, time savings, search ranking improvements or business results.
+Any mandatory rights under applicable law remain unaffected.
+
+7. Feedback
+Feedback is optional. Report issues through the approved public project page
+or the authorized invitation thread. Do not post client CSVs, credentials,
+private contact details or confidential screenshots. The owner may use
+non-confidential feedback to improve the product. This does not authorize
+publishing a participant's name or testimonial.
+
+This permission applies to the authorized 0.2.0-pilot download from the
+public project above. No paid purchase is required.

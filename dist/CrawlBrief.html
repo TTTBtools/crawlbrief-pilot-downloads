@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; frame-src blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CrawlBrief — Crawl CSV to client report</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2210%22%20fill%3D%22%23176b61%22%2F%3E%3Cpath%20d%3D%22M12%209h11l6%206v16H12V9Z%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M23%209v7h6M16%2021h5M16%2026l3%203%207-8%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<style>:root{color-scheme:light;--ink:#203142;--muted:#53687c;--green:#176b61;--line:#dbe4e9;--paper:#f4f7f8}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 'Segoe UI',Arial,sans-serif}header{max-width:1250px;margin:auto;padding:25px 35px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.brand{font-size:23px;font-weight:700;display:flex;align-items:center;gap:10px}.mark{display:inline-grid;place-items:center;width:34px;height:34px;background:var(--green);color:white;border-radius:9px}small{font-size:10px;letter-spacing:1px;border:1px solid var(--line);padding:4px 6px;border-radius:4px}.private{font-size:12px;color:var(--green)}main{max-width:1250px;margin:auto;padding:0 35px 30px}.intro{display:grid;grid-template-columns:1.6fr 1fr;gap:80px;padding:55px 0 40px;align-items:center}.eyebrow,.step{font-size:11px;letter-spacing:2px;font-weight:700;color:var(--green)}h1{font-size:62px;line-height:1.06;letter-spacing:-2px;font-weight:650;margin:18px 0}h2{font-size:23px;line-height:1.3;letter-spacing:-.4px;margin:12px 0 18px}p{margin:12px 0}.intro>div>p{font-size:17px;color:var(--muted)}aside{border-left:2px solid #a0c6bd;padding:0 0 0 30px}.number{font:12px monospace;color:var(--muted)}aside h2{font-size:28px}.small,.hint{font-size:12px;color:var(--muted)}.workspace{display:grid;grid-template-columns:1fr 1.1fr;gap:22px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:28px;margin-bottom:24px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}label span{font-weight:400;color:var(--muted);margin-left:5px}input,textarea,select{font:inherit;color:var(--ink);border:1px solid #b9c8d1;border-radius:6px;background:white;padding:10px;width:100%}textarea{resize:vertical}input[type=file]{font-size:12px;padding:10px;background:#f8fafb}input::file-selector-button{border:0;background:#e5eeec;border-radius:4px;padding:7px 10px;color:var(--green);margin-right:10px}button{border:1px solid #b7c8ce;background:white;color:var(--ink);border-radius:6px;padding:10px 15px;font:600 13px 'Segoe UI',Arial,sans-serif;cursor:pointer}button:hover{background:#edf4f2}button:disabled{opacity:.45;cursor:default}.primary{color:white;background:var(--green);border-color:var(--green)}.primary:hover{background:#11544d}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.text-button{padding:8px 0;border:0;font-size:12px;color:var(--muted)}#message{font-size:13px;background:#edf4f2;padding:12px;border-radius:5px;margin-top:10px;overflow-wrap:anywhere}.error{color:#9b2d28!important;background:#fff1ed!important}details{font-size:12px;margin-top:18px}summary{cursor:pointer;color:var(--green);font-weight:600}.review-head{display:flex;justify-content:space-between;gap:20px;align-items:center}.review-head .buttons{margin:0}.stats{display:flex;gap:30px;padding:18px 0;border-block:1px solid var(--line);flex-wrap:wrap}.stat b{display:block;font-size:28px}.stat{font-size:12px;color:var(--muted)}.filter-row{display:flex;gap:12px;align-items:center;margin:18px 0}.filter-row label{margin:0}.filter-row select{width:170px}.finding{border-top:1px solid var(--line);padding:18px 0;display:grid;grid-template-columns:30px 1fr;gap:8px}.finding input[type=checkbox]{margin-top:9px;width:18px;height:18px;accent-color:var(--green)}.finding h3{font-size:16px;margin:5px 0}.finding p{font-size:13px}.url{font:12px/1.6 monospace;overflow-wrap:anywhere}.pill{display:inline-block;font-size:10px;letter-spacing:.5px;font-weight:600;padding:3px 7px;border-radius:4px;background:#eaf4f1;color:#176b61;margin-right:6px}.pill.urgent{color:#a63d22;background:#fff1e7}.note{font-size:13px;padding:9px;min-height:60px}.pagination{display:flex;justify-content:center;align-items:center;gap:18px;font-size:12px;margin:20px 0}.export-bar{margin-top:24px;background:#f0f6f4;border-radius:8px;padding:22px}.confirm{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:13px}.confirm input{width:18px;height:18px;flex:none;accent-color:var(--green)}#export-message{margin:12px 0;font-size:13px}iframe{width:100%;height:750px;border:1px solid var(--line);background:#f3f5f8}footer{font-size:12px;color:var(--muted);padding:15px 0 30px}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #5ba69a;outline-offset:3px}[hidden]{display:none!important}#comparison li{overflow-wrap:anywhere;padding:6px 0}@media(max-width:800px){header{padding:20px}.private{display:none}main{padding:0 20px}.intro{gap:25px;padding:35px 0;grid-template-columns:1fr}h1{font-size:46px}aside{display:none}.workspace{grid-template-columns:1fr;gap:0}.panel{padding:22px}.review-head{display:block}.review-head .buttons{margin:12px 0}.stats{gap:18px}.filter-row{flex-wrap:wrap}.form-grid{grid-template-columns:1fr}small{font-size:8px}}
+.mark svg{width:100%;height:100%;display:block}.intro>div>p.small{font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#176b61"/><path d="M12 9h11l6 6v16H12V9Z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M23 9v7h6M16 21h5M16 26l3 3 7-8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> CrawlBrief <small>PILOT BUILD</small></div><span class="private">● Local processing · No account</span></header>
+<main>
+<section class="intro"><div><div class="eyebrow">CLIENT REPORTS FROM YOUR EXISTING DATA</div><h1>Crawl results.<br>Clear reports.</h1><p>Turn an existing crawl CSV into a client report.<br>Choose the findings, add your notes, then download.</p><p class="small">First visit? Choose <b>Try sample data</b> below. The sample is fictional.</p></div><aside><span class="number">01 — 03</span><h2>Your review.<br>A useful report.</h2><p>Read CSV → Review → Download</p><p class="small">Runs in your browser. No uploads, AI API calls or analytics. Nothing is saved automatically.</p></aside></section>
+<div class="workspace">
+<section class="panel"><div class="step">01 / READ CSV</div><h2>Choose your crawl CSV</h2><p class="hint">Screaming Frog: English <b>Internal → All → Export</b>, UTF-8 comma-separated CSV. Compatible schemas also work.</p>
+<label for="current">Current export <span>required</span></label><input id="current" type="file" accept=".csv,text/csv">
+<label for="previous">Previous export <span>optional comparison</span></label><input id="previous" type="file" accept=".csv,text/csv">
+<p class="hint">Up to 5,000 URLs and 5 MB per file. Required columns: Address, Status Code. Same crawl settings recommended.</p>
+<div class="buttons"><button id="import" class="primary">Read exports</button><button id="demo">Try sample data</button></div><button id="reset" class="text-button">Clear workspace</button>
+<div id="message" role="status" aria-live="polite">No data imported. Try the sample to see the workflow.</div>
+<details><summary>Supported columns and limits</summary><p>Optional: Content Type (or Content), Title 1, Meta Description 1, H1-1, Indexability Status. Missing columns disable those checks. No live crawling, ranking advice, JavaScript rendering or full SEO audit. XLSX, semicolon CSV and localized headers are not supported.</p><p>URLs and query strings remain in exported reports. Review them before sharing. Closing or reloading this page clears your work.</p></details>
+</section>
+<section class="panel"><div class="step">02 / REPORT DETAILS</div><h2>Add your report details</h2><div class="form-grid"><div><label for="agency">Agency / studio</label><input id="agency" maxlength="120" placeholder="Your studio"></div><div><label for="client">Client</label><input id="client" maxlength="120" placeholder="Client name"></div><div><label for="reviewer">Prepared by</label><input id="reviewer" maxlength="120" placeholder="Your name"></div><div><label for="period">Crawl date / period</label><input id="period" maxlength="120" placeholder="Current: 20 Oct / Previous: 13 Oct"></div></div><label for="summary">Your summary</label><textarea id="summary" rows="5" maxlength="6000" placeholder="What should the client do next? Add your judgment, not just the numbers."></textarea><p class="hint">You write the summary. Including or excluding findings does not rewrite it. Check that your summary matches the selected findings before sharing.</p></section>
+</div>
+<section id="review" class="panel review" hidden><div class="step">03 / REVIEW & EXPORT</div><div class="review-head"><h2>Keep the useful findings.</h2><div class="buttons"><button id="select-all">Include all</button><button id="select-none">Exclude all</button></div></div><div id="stats" class="stats"></div><p id="coverage" class="hint"></p><div class="filter-row"><label for="filter">Show</label><select id="filter"><option value="all">All findings</option><option value="Check first">Check first</option><option value="Review">Review</option></select><span id="selection" class="hint"></span></div><div id="findings"></div><div class="pagination"><button id="prev-page">Previous</button><span id="page-label"></span><button id="next-page">Next</button></div><details id="changes"><summary>See what changed between exports</summary><div id="comparison"></div></details><div class="export-bar"><label class="confirm"><input type="checkbox" id="confirmed"> I reviewed the selected findings, summary, comparison and sensitive URL details before sharing.</label><div class="buttons"><button id="preview" class="primary">Preview report</button><button id="html">Download report HTML</button><button id="csv">Download action CSV</button></div><p class="hint">To make a PDF, open the downloaded HTML and use Print → Save as PDF.</p></div><div id="export-message" role="status" aria-live="polite"></div></section>
+<section id="preview-section" class="panel" hidden><div class="review-head"><h2>Report preview</h2><button id="close-preview">Close preview</button></div><iframe id="report-preview" title="Client report preview" sandbox=""></iframe></section>
+<footer>CrawlBrief 0.2.0-pilot · A reporting assistant, not a site health certificate.<br>Independent software. Not affiliated with or endorsed by Screaming Frog.</footer>
+</main><script>(function (root) {
+  'use strict';
+  // Original document-and-check mark. Kept inline so the app needs no network.
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#176b61"/><path d="M12 9h11l6 6v16H12V9Z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M23 9v7h6M16 21h5M16 26l3 3 7-8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const brand = {svg, icon: 'data:image/svg+xml,' + encodeURIComponent(svg)};
+  if (typeof module !== 'undefined' && module.exports) module.exports = brand;
+  else root.CrawlBriefBrand = brand;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+</script><script>(function (root) {
+  'use strict';
+  const VERSION = '0.2.0-pilot';
+  const Brand = typeof module !== 'undefined' && module.exports ? require('./brand.js') : root.CrawlBriefBrand;
+  const LIMIT = 5000;
+  const RULES = {
+    http_error: ['Check first', 'URL returned an error', 'Check the URL and its incoming links. Confirm whether it should exist, redirect, or be removed.'],
+    unavailable: ['Review', 'No successful response recorded', 'Retry the URL in your crawler. A blocked or failed request does not prove a broken page.'],
+    redirect: ['Review', 'Redirect recorded', 'Confirm the redirect destination and intent. This export does not verify the final destination.'],
+    noindex: ['Review', 'Noindex recorded', 'Confirm whether this page should appear in search. Private or utility pages may intentionally use noindex.'],
+    title: ['Review', 'HTML title is empty', 'Review the page and add an appropriate title if needed.'],
+    description: ['Review', 'Meta description is empty', 'Consider a useful description for this page. An empty description is not proof of a ranking problem.'],
+    h1: ['Review', 'First H1 is empty', 'Review the visible page structure. An empty exported H1 is not a complete accessibility test.']
+  };
+  function parseCSV(text) {
+    if (typeof text !== 'string' || text.length > 5 * 1024 * 1024) throw Error('Use a UTF-8 CSV file smaller than 5 MB.');
+    text = text.replace(/^\uFEFF/, '');
+    if (text.includes('\uFFFD') || text.includes('\0')) throw Error('Unsupported encoding. Export the file as UTF-8 CSV.');
+    const rows = []; let row = [], field = '', quoted = false, closed = false;
+    const cell = () => { row.push(field); field = ''; closed = false; };
+    const line = () => { cell(); if (row.some(v => v.trim())) rows.push(row); row = []; if (rows.length > LIMIT + 1) throw Error('Maximum 5,000 URL rows per file.'); };
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (quoted) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else { quoted = false; closed = true; } }
+        else field += c;
+      } else if (c === ',') cell();
+      else if (c === '\r' || c === '\n') { line(); if (c === '\r' && text[i + 1] === '\n') i++; }
+      else if (c === '"') { if (field || closed) throw Error('Invalid CSV quoting. Re-export as comma-separated CSV.'); quoted = true; }
+      else { if (closed) throw Error('Unexpected text after a quoted CSV value.'); field += c; }
+    }
+    if (quoted) throw Error('The CSV ends inside a quoted value.');
+    if (field || row.length || closed) line();
+    if (rows.length < 2) throw Error('The CSV needs a header and at least one URL row.');
+    return rows;
+  }
+  function readCrawl(text) {
+    const rows = parseCSV(text), headers = rows.shift().map(x => {
+      const name = x.trim().toLowerCase();
+      return name === 'content' ? 'content type' : name;
+    });
+    if (new Set(headers).size !== headers.length) throw Error('Duplicate CSV column names. Re-export the file.');
+    for (const h of ['address', 'status code']) if (!headers.includes(h)) throw Error('Missing column: ' + h + '. Use an English Internal > All CSV export.');
+    const at = name => headers.indexOf(name), get = (row, name) => at(name) < 0 ? null : row[at(name)].trim();
+    const records = new Map();
+    for (const [index, row] of rows.entries()) {
+      if (row.length !== headers.length) throw Error('Row ' + (index + 2) + ' has a different number of columns.');
+      const address = get(row, 'address'); let url;
+      try { url = new URL(address); } catch { throw Error('Row ' + (index + 2) + ' needs an absolute HTTP or HTTPS address.'); }
+      if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw Error('Row ' + (index + 2) + ' has an unsupported or credential-containing address.');
+      if (records.has(address)) throw Error('Duplicate address at row ' + (index + 2) + '. Use one row per URL.');
+      const raw = get(row, 'status code');
+      if (!/^(?:[1-5]\d\d|0)?$/.test(raw)) throw Error('Invalid status code at row ' + (index + 2) + '.');
+      const status = Number(raw), type = get(row, 'content type');
+      records.set(address, {address, status, html: type !== null && /(?:text\/html|application\/xhtml\+xml)/i.test(type),
+        title: get(row, 'title 1'), description: get(row, 'meta description 1'), h1: get(row, 'h1-1'), indexability: get(row, 'indexability status')});
+    }
+    const disabled = [];
+    if (!headers.includes('content type')) disabled.push('HTML-specific checks: Content Type column missing');
+    for (const [col, label] of [['title 1','Title'],['meta description 1','Meta description'],['h1-1','H1'],['indexability status','Noindex']])
+      if (!headers.includes(col)) disabled.push(label + ': column missing');
+    return {records, headers, disabled};
+  }
+  function evaluable(record, rule) {
+    if (rule === 'unavailable') return true;
+    if (['http_error', 'redirect'].includes(rule)) return record.status >= 200;
+    if (rule === 'noindex') return record.status >= 200 && record.status < 300 && record.html && record.indexability !== null;
+    return record.status >= 200 && record.status < 300 && record.html && record[rule] !== null;
+  }
+  function rulesFor(record) {
+    const found = [];
+    if (record.status >= 400) found.push('http_error');
+    else if (record.status < 200) found.push('unavailable');
+    else if (record.status < 400 && record.status >= 300) found.push('redirect');
+    if (evaluable(record, 'noindex') && /\bnoindex\b/i.test(record.indexability)) found.push('noindex');
+    for (const rule of ['title', 'description', 'h1']) if (evaluable(record, rule) && !record[rule]) found.push(rule);
+    return found;
+  }
+  function analyze(current, previous = null) {
+    if (previous) {
+      const hosts = new Set([...current.records.values()].map(r => new URL(r.address).hostname));
+      if (![...previous.records.values()].some(r => hosts.has(new URL(r.address).hostname))) throw Error('The two exports have no hostname in common. Select exports for the same site.');
+    }
+    const findings = [], noLongerObserved = [], unverified = [];
+    for (const record of current.records.values()) for (const rule of rulesFor(record)) {
+      const old = previous?.records.get(record.address);
+      const change = !previous ? 'Current export' : !old || !evaluable(old, rule) ? 'No comparable baseline' : rulesFor(old).includes(rule) ? 'Still observed' : 'Newly observed';
+      const [priority, title, action] = RULES[rule];
+      findings.push({id: JSON.stringify([record.address, rule]), address: record.address, rule, priority, title, action, status: record.status, change, include: true, note: ''});
+    }
+    if (previous) for (const record of previous.records.values()) for (const rule of rulesFor(record)) {
+      const now = current.records.get(record.address);
+      const entry = {address: record.address, rule, title: RULES[rule][1]};
+      if (!now || !evaluable(now, rule)) unverified.push({...entry, reason: !now ? 'URL absent from current export' : 'Required evidence absent from current export'});
+      else if (!rulesFor(now).includes(rule)) noLongerObserved.push(entry);
+    }
+    findings.sort((a,b) => (a.priority === 'Check first' ? 0 : 1) - (b.priority === 'Check first' ? 0 : 1) || a.address.localeCompare(b.address) || a.rule.localeCompare(b.rule));
+    return {findings, noLongerObserved, unverified, urls: current.records.size, previousUrls: previous?.records.size ?? null, disabled: current.disabled, previousDisabled: previous?.disabled ?? []};
+  }
+  const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function reportHTML(result, meta) {
+    const e = escape, selected = result.findings.filter(x => x.include);
+    const cards = selected.map(f => `<article><span class="tag">${e(f.priority)} · ${e(f.change)}</span><h3>${e(f.title)}</h3><p class="url">${e(f.address)}</p><p>Recorded status: ${e(f.status || 'No response')}</p><p>${e(f.action)}</p>${f.note ? `<p class="note"><b>Reviewer note:</b> ${e(f.note)}</p>` : ''}</article>`).join('');
+    const changes = list => list.map(f => `<li><b>${e(f.title)}</b><br><span class="url">${e(f.address)}</span>${f.reason ? '<br>' + e(f.reason) : ''}</li>`).join('');
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>${e(meta.client || 'Client')} — Crawl review</title><link rel="icon" type="image/svg+xml" href="${e(Brand.icon)}"><style>
+    *{box-sizing:border-box}body{font:16px/1.65 Arial,sans-serif;color:#203042;background:#f3f5f8;margin:0}main{max-width:900px;margin:40px auto;padding:50px;background:white;border-top:8px solid #176b61}h1{font-size:42px;line-height:1.15;margin:12px 0 24px;letter-spacing:-1px}h2{margin-top:36px}h3{margin:8px 0}small,.muted{color:#536478}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:bold;color:#176b61}.metrics{display:flex;gap:25px;border-block:1px solid #dce4ea;padding:20px 0}.metrics b{display:block;font-size:28px}.tag{font-size:12px;font-weight:bold;color:#176b61}article{border-top:1px solid #dce4ea;padding:24px 0;break-inside:avoid}.url{overflow-wrap:anywhere;font-family:monospace;font-size:13px}.note{background:#f2f7f6;padding:12px;white-space:pre-wrap}.scope{font-size:14px;background:#f4f6f9;padding:20px}.summary{white-space:pre-wrap}li{padding:8px 0;break-inside:avoid}@media(max-width:600px){main{margin:0;padding:24px}h1{font-size:32px}.metrics{flex-wrap:wrap}}@media print{body{background:white}main{margin:0;max-width:none;padding:10mm}h2,h3{break-after:avoid;page-break-after:avoid}h3+p{break-after:avoid;page-break-after:avoid}h3+p+ul{break-before:avoid;page-break-before:avoid}.scope{break-inside:avoid}@page{size:A4;margin:12mm}}
+    </style></head><body><main><div class="eyebrow">${e(meta.agency || 'Crawl review')} · Technical findings</div><h1>${e(meta.client || 'Client')}<br>Crawl review</h1><p>${e(meta.period || 'Export date not supplied')} · Prepared by ${e(meta.reviewer || 'Reviewer not named')}</p><div class="metrics"><div><b>${result.urls}</b>URLs in current file</div><div><b>${selected.length}</b>Included findings</div><div><b>${result.findings.length-selected.length}</b>Excluded by reviewer</div></div><h2>Reviewer summary</h2><p class="summary">${e(meta.summary || 'No additional summary supplied.')}</p><h2>Findings to discuss</h2>${cards || '<p>No findings selected for this report. This is not a full-site pass or a guarantee of site health.</p>'}${result.previousUrls !== null ? `<h2>Comparison with previous export</h2><p>${result.previousUrls} previous URLs / ${result.urls} current URLs. Exact URL matches only. Confirm that crawl scope and settings match.</p><h3>No longer observed (${result.noLongerObserved.length})</h3><p>This means the supported rule no longer matched in the current CSV. It does not prove a live fix.</p><ul>${changes(result.noLongerObserved) || '<li>None recorded.</li>'}</ul><h3>Not verified (${result.unverified.length})</h3><p>Missing URLs or missing evidence are never counted as fixed.</p><ul>${changes(result.unverified) || '<li>None recorded.</li>'}</ul>` : ''}<h2>Scope and limits</h2><div class="scope">This report uses imported crawl data, not a new live-site test. Supported checks: HTTP errors, missing responses, redirects, exported noindex, and empty HTML title, meta description or first H1. Missing metadata is checked only on successful HTML rows. ${result.disabled.length ? '<p>Current checks unavailable: '+e(result.disabled.join('; '))+'.</p>' : ''}${result.previousDisabled.length ? '<p>Previous checks unavailable: '+e(result.previousDisabled.join('; '))+'.</p>' : ''}<p>Redirects, noindex and metadata require human judgment. Performance, accessibility compliance, security, rankings, conversion impact, crawl completeness and redirect destinations are not verified. URL parameters remain in the report; the reviewer must remove sensitive details before sharing.</p><p>The exporter confirmed review of this report. Confirmation is a workflow step, not an independent certification.</p></div><p class="muted"><small>Prepared with CrawlBrief ${VERSION}. Print from your browser to save as PDF.</small></p></main></body></html>`;
+  }
+  function csvCell(value) { let s = String(value ?? ''); if (/^[\s]*[=+\-@]/.test(s) || /^[\t\r\n]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; }
+  function actionsCSV(result) {
+    return [['Priority','URL','Finding','Change','Suggested review','Reviewer note'], ...result.findings.filter(x => x.include).map(f => [f.priority,f.address,f.title,f.change,f.action,f.note])].map(row => row.map(csvCell).join(',')).join('\r\n');
+  }
+  function filename(client, kind) {
+    const normalized = String(client || '').normalize('NFKC').toLowerCase();
+    const safe = [...normalized].slice(0,60).join('').replace(/[^\p{L}\p{N}_-]+/gu,'-').replace(/^-+|-+$/g,'') || 'client';
+    return 'crawlbrief-' + safe + (kind === 'csv' ? '-actions.csv' : '-report.html');
+  }
+  const API = {VERSION, LIMIT, parseCSV, readCrawl, analyze, reportHTML, actionsCSV, escape, filename};
+  if (typeof module !== 'undefined' && module.exports) module.exports = API;
+  else root.CrawlBrief = API;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+</script><script>'use strict';
+const C = globalThis.CrawlBrief;
+const $ = id => document.getElementById(id);
+let result = null, page = 0, reportURL = null, dirty = false;
+const PAGE_SIZE = 30;
+const sampleCurrent = 'Address,Status Code,Content Type,Title 1,Meta Description 1,H1-1,Indexability Status\nhttps://studio.example/,200,text/html,Studio,Independent design studio,Good design,\nhttps://studio.example/work,200,text/html,Our work,,Selected work,\nhttps://studio.example/contact,404,text/html,,,,\nhttps://studio.example/thanks,200,text/html,Thank you,Message received,Thank you,noindex\nhttps://studio.example/about,200,text/html,About us,Meet our team,Our team,\n';
+const samplePrevious = 'Address,Status Code,Content Type,Title 1,Meta Description 1,H1-1,Indexability Status\nhttps://studio.example/,200,text/html,Studio,Independent design studio,Good design,\nhttps://studio.example/work,200,text/html,Our work,,Selected work,\nhttps://studio.example/contact,404,text/html,,,,\nhttps://studio.example/thanks,200,text/html,Thank you,Message received,Thank you,noindex\nhttps://studio.example/about,404,text/html,,,,\nhttps://studio.example/old-page,404,text/html,,,,\n';
+function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : ''; }
+function invalidate() { $('confirmed').checked = false; $('preview-section').hidden = true; $('export-message').textContent = ''; if (reportURL) { URL.revokeObjectURL(reportURL); reportURL = null; } $('report-preview').removeAttribute('src'); dirty = true; }
+function forgetResult() { result = null; $('review').hidden = true; invalidate(); }
+function load(current, previous, label) {
+  const next = C.analyze(C.readCrawl(current), previous ? C.readCrawl(previous) : null);
+  for (const id of ['agency','client','reviewer','period','summary']) $(id).value = '';
+  result = next; page = 0; $('filter').value = 'all'; invalidate(); $('review').hidden = false;
+  message(label + ': ' + result.urls + ' URLs read. Review the findings below.'); render();
+}
+function render() {
+  if (!result) return;
+  const included = result.findings.filter(f => f.include).length;
+  $('stats').innerHTML = [[result.urls,'URLs in current file'],[result.findings.length,'Recorded findings'],[result.noLongerObserved.length,'No longer observed'],[result.unverified.length,'Not verified']].map(([n,label]) => `<div class="stat"><b>${n}</b>${C.escape(label)}</div>`).join('');
+  $('coverage').textContent = result.disabled.length ? 'Checks unavailable: ' + result.disabled.join('; ') : 'All seven supported checks have the required columns. Findings still need human review.';
+  $('selection').textContent = included + ' of ' + result.findings.length + ' findings included in the report.';
+  const visible = result.findings.filter(f => $('filter').value === 'all' || f.priority === $('filter').value);
+  page = Math.max(0, Math.min(page, Math.ceil(visible.length / PAGE_SIZE) - 1));
+  $('findings').replaceChildren();
+  for (const f of visible.slice(page * PAGE_SIZE, (page+1) * PAGE_SIZE)) {
+    const card = document.createElement('div'); card.className = 'finding';
+    const check = document.createElement('input'); check.type = 'checkbox'; check.checked = f.include; check.setAttribute('aria-label', 'Include ' + f.title + ' for ' + f.address);
+    check.addEventListener('change', () => { f.include = check.checked; invalidate(); $('selection').textContent = result.findings.filter(x=>x.include).length + ' of ' + result.findings.length + ' findings included in the report.'; });
+    const body = document.createElement('div');
+    body.innerHTML = `<span class="pill ${f.priority === 'Check first' ? 'urgent' : ''}">${C.escape(f.priority)}</span><span class="pill">${C.escape(f.change)}</span><h3>${C.escape(f.title)}</h3><div class="url">${C.escape(f.address)}</div><p>Recorded status: ${C.escape(f.status || 'No response')} · ${C.escape(f.action)}</p>`;
+    const note = document.createElement('textarea'); note.className = 'note'; note.rows = 2; note.maxLength = 2000; note.placeholder = 'Add context or a next step for your client…'; note.value = f.note; note.setAttribute('aria-label','Reviewer note for ' + f.title + ' ' + f.address);
+    note.addEventListener('input', () => { f.note = note.value; invalidate(); }); body.append(note); card.append(check,body); $('findings').append(card);
+  }
+  if (!visible.length) $('findings').textContent = 'No matching findings. This is not a complete site-health assessment.';
+  $('page-label').textContent = visible.length ? `Page ${page+1} of ${Math.ceil(visible.length/PAGE_SIZE)}` : '0 findings';
+  $('prev-page').disabled = page === 0; $('next-page').disabled = (page+1)*PAGE_SIZE >= visible.length;
+  $('changes').hidden = result.previousUrls === null;
+  const list = entries => entries.map(f=>`<li><b>${C.escape(f.title)}</b> — ${C.escape(f.address)}${f.reason ? '<br>'+C.escape(f.reason) : ''}</li>`).join('') || '<li>None recorded.</li>';
+  $('comparison').innerHTML = `<p>Exact URL matches only. Different crawl scope or settings can change results.</p><h3>No longer observed</h3><p>These checks no longer match in the current CSV. Live fixes are not verified.</p><ul>${list(result.noLongerObserved)}</ul><h3>Not verified</h3><ul>${list(result.unverified)}</ul>`;
+}
+async function readFile(file) { if (file.size > 5*1024*1024) throw Error('Each file must be smaller than 5 MB.'); return await file.text(); }
+$('import').addEventListener('click', async () => {
+  const current = $('current').files[0], previous = $('previous').files[0];
+  forgetResult();
+  if (!current) { message('Choose a current CSV export first.', true); return; }
+  $('import').disabled = true; $('demo').disabled = true; $('current').disabled = true; $('previous').disabled = true; $('reset').disabled = true;
+  try { load(await readFile(current), previous ? await readFile(previous) : null, 'Imported'); }
+  catch (error) { message(error.message, true); }
+  finally { for (const id of ['import','demo','current','previous','reset']) $(id).disabled = false; }
+});
+$('demo').addEventListener('click', () => {
+  $('current').value = ''; $('previous').value = ''; load(sampleCurrent, samplePrevious, 'SAMPLE DATA — fictional site');
+  $('agency').value = 'Example Studio'; $('client').value = 'Sample client'; $('reviewer').value = 'Demo reviewer'; $('period').value = 'Sample comparison — fictional data';
+  $('summary').value = 'Review the recorded error on the contact page first. Confirm that the thank-you page should remain out of search. The old page is absent from this crawl, so its status is not verified.';
+});
+for (const id of ['current','previous']) $(id).addEventListener('change', () => { forgetResult(); message('File selection changed. Click Read exports to refresh the report.'); });
+for (const id of ['agency','client','reviewer','period','summary']) $(id).addEventListener('input', invalidate);
+$('select-all').addEventListener('click', () => { result.findings.forEach(f=>f.include=true); invalidate(); render(); });
+$('select-none').addEventListener('click', () => { result.findings.forEach(f=>f.include=false); invalidate(); render(); });
+$('filter').addEventListener('change', () => { page = 0; render(); });
+$('prev-page').addEventListener('click', () => { page--; render(); });
+$('next-page').addEventListener('click', () => { page++; render(); });
+function meta() { return Object.fromEntries(['agency','client','reviewer','period','summary'].map(id=>[id,$(id).value.trim()])); }
+function ready() {
+  if (!result) return false;
+  if (!$('confirmed').checked) { $('export-message').textContent = 'Please confirm your review before exporting or previewing.'; $('confirmed').focus(); return false; }
+  $('export-message').textContent = ''; return true;
+}
+function download(content, type, filename) { const url = URL.createObjectURL(new Blob([content], {type})); const a=document.createElement('a'); a.href=url; a.download=filename; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),30000); $('export-message').textContent = 'Download requested. Check your browser downloads.'; }
+$('preview').addEventListener('click', () => { if (!ready()) return; if (reportURL) URL.revokeObjectURL(reportURL); reportURL = URL.createObjectURL(new Blob([C.reportHTML(result,meta())],{type:'text/html'})); $('report-preview').src=reportURL; $('preview-section').hidden=false; $('preview-section').scrollIntoView({behavior:'smooth'}); });
+$('html').addEventListener('click', () => { if (ready()) download(C.reportHTML(result,meta()), 'text/html;charset=utf-8', C.filename(meta().client,'html')); });
+$('csv').addEventListener('click', () => { if (ready()) download('\uFEFF'+C.actionsCSV(result), 'text/csv;charset=utf-8', C.filename(meta().client,'csv')); });
+$('close-preview').addEventListener('click', () => { $('preview-section').hidden=true; });
+$('reset').addEventListener('click', () => { if (dirty && !confirm('Clear imported data, notes and report details? This cannot be undone.')) return; forgetResult(); for(const id of ['current','previous','agency','client','reviewer','period','summary']) $(id).value=''; dirty=false; message('Workspace cleared.'); });
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue=''; } });
+</script>
+</body></html>

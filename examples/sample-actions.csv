@@ -1,0 +1,3 @@
+"Priority","URL","Finding","Change","Suggested review","Reviewer note"
+"Check first","https://studio.example/contact","URL returned an error","Still observed","Check the URL and its incoming links. Confirm whether it should exist, redirect, or be removed.","Sample reviewer note: confirm the intended contact-page address before changing links."
+"Review","https://studio.example/work","Meta description is empty","Still observed","Consider a useful description for this page. An empty description is not proof of a ranking problem.",""

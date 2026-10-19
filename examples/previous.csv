@@ -1,0 +1,7 @@
+Address,Status Code,Content Type,Title 1,Meta Description 1,H1-1,Indexability Status
+https://studio.example/,200,text/html,Studio,Independent design studio,Good design,
+https://studio.example/work,200,text/html,Our work,,Selected work,
+https://studio.example/contact,404,text/html,,,,
+https://studio.example/thanks,200,text/html,Thank you,Message received,Thank you,noindex
+https://studio.example/about,404,text/html,,,,
+https://studio.example/old-page,404,text/html,,,,
